@@ -1,5 +1,3 @@
-![# KVCache-Facroty](assets/logo.png)
-
 # Lookahead Q-Cache: Achieving More Consistent KV Cache Eviction via Pseudo Query [EMNLP 2025]
 
 
