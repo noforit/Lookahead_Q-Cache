@@ -3065,7 +3065,7 @@ def Qwen2ForCausalLM_forward_LAQ(
         new_token = [id0]
         stage1_decode_kv = select_KV_lookahead_stage(full_past_kv, self.config)
         past_key_values = stage1_decode_kv
-        while len(new_token) <= self.config.probe_size:
+        while len(new_token) <= self.config.lookahead_size:
 
             input_ids = torch.tensor([[new_token[-1]]], dtype=torch.long, device='cuda:0')
             attention_mask = torch.cat((attention_mask, torch.tensor([[1]], dtype=torch.long, device='cuda:0')), dim=1)
@@ -3074,7 +3074,7 @@ def Qwen2ForCausalLM_forward_LAQ(
             outputs, logits = calc_logits(self, input_ids=input_ids, attention_mask=attention_mask, position_ids=position_ids, past_key_values=past_key_values, cache_position=cache_position)
             new_id = get_softmax_max_tokenid(logits, self.config.tokenizer)
             past_key_values = outputs.past_key_values
-            if new_id == self.config.tokenizer.eos_token_id or len(new_token) == self.config.probe_size:
+            if new_id == self.config.tokenizer.eos_token_id or len(new_token) == self.config.lookahead_size:
                 break
             new_token.append(new_id)
         

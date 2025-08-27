@@ -161,7 +161,7 @@ class LLMNeedleHaystackTester:
                     ).eval()
 
 
-            if self.method in ["pyramidkv", "snapkv","streamingllm","h2o","cam",'speckv']:
+            if self.method.lower() in ["pyramidkv", "snapkv","streamingllm","h2o","cam",'laq']:
             
                 if self.model_provider == 'LLaMA3':
                     replace_llama(self.method.lower())
@@ -191,12 +191,12 @@ class LLMNeedleHaystackTester:
                 elif self.method.lower() in ["snapkv","streamingllm","h2o","cam"]:
                     window_sizes = 32
 
-                elif self.method.lower() in ['speckv']:
+                elif self.method.lower() in ['laq']:
                     self.model_to_test.config.tokenizer = self.enc
                     self.model_to_test.config.kernel_sizes = kernel_sizes
                     self.model_to_test.config.pooling = pooling
-                    max_lookahead_size = args.max_lookahead_size
-                    self.model_to_test.config.max_lookahead_size = max_lookahead_size
+                    lookahead_size = args.max_lookahead_size
+                    self.model_to_test.config.lookahead_size = lookahead_size
                     # window_sizes = 16 - probe_size
                     # if args.all_query != 0:
                     #     window_sizes = args.all_query - probe_size
@@ -546,9 +546,9 @@ if __name__ == "__main__":
     parser.add_argument('--model_provider', type=str, default="LLaMA", help='which model to use')
     parser.add_argument('--api_key', type=str, default="", help='OpenAI API Key')
     parser.add_argument('--step', type=int, default=1000)
-    parser.add_argument('--method', type=str, default="full", choices=['full', 'pyramidkv', 'snapkv', 'streamingllm', 'h2o', 'cam', 'speckv'])
+    parser.add_argument('--method', type=str, default="full", choices=['full', 'pyramidkv', 'snapkv', 'streamingllm', 'h2o', 'cam', 'LAQ'])
     parser.add_argument('--max_capacity_prompt', type=int, default=128)
-    parser.add_argument("--sample_file_method", type=str, default='snapkv')
+    parser.add_argument("--lookahead_method", type=str, default='snapkv')
     parser.add_argument("--max_lookahead_size", type=int, default=8)
     parser.add_argument("--window_size", type=int, default=32)
     parser.add_argument("--stage2_window_size", type=int, default=8)

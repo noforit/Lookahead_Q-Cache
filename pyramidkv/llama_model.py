@@ -3112,7 +3112,7 @@ import time
 
 def select_KV_lookahead_stage(full_past_kv, config):
 
-    method = config.sample_file_method
+    method = config.lookahead_method
     max_capacity_prompts = config.lookahead_max_capacity_prompts
     kernel_sizes = 7
     pooling = "maxpool"

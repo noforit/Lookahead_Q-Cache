@@ -18,19 +18,36 @@ We sincerely thank the authors for providing open-source code to support this pr
 
 ## Installation
 
-```python
+```bash
 
 git clone git@github.com:noforit/Lookahead_Q-Cache.git
 cd Lookahead_Q-Cache
 conda create -n LAQ python=3.12
+conda activate LAQ
 pip install -r requirements.txt .
 
 ```
 ## LongBench
 
+You can obtain the results of LAQ on LongBench by referring to the `run_LAQ.sh` and modifying the corresponding parameters.
+
+```bash
+bash run_LAQ.sh
+```
 
 
 ## Needle in haystack
+
+
+```bash
+bash run_needle.sh
+```
+
+After inference, run
+
+`python scripts/scripts_needle/visualize.py`
+
+to draw the img, you should change `FOLDER_PATH` in `visualize.py` to your output path.
 
 
 ## Citation

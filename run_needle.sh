@@ -17,7 +17,6 @@ module load cuda/12.4.1
 . "$HOME"/miniconda3/etc/profile.d/conda.sh
 conda activate LAQ
 
-
 export CUDA_VISIBLE_DEVICES=0
 
     

@@ -13,7 +13,7 @@ from pyramidkv.mistral_model import mistral_sdpa_attn_forward_PyramidKV,mistral_
 from pyramidkv.mistral_model import adaptive_MistralModel_forward
 
 from pyramidkv.llama_model import prepare_inputs_for_generation_llama, prepare_inputs_for_generation_llama_new
-from pyramidkv.llama_model import  LlamaAttention_forward_probe, LlamaForCausalLM_forward_probe, LlamaForCausalLM_forward_speed, LlamaFlashAttention2_forward_probe, LlamaForCausalLM_forward_LAQ, LlamaFlashAttention2_forward_LAQ
+from pyramidkv.llama_model import  LlamaForCausalLM_forward_LAQ, LlamaFlashAttention2_forward_LAQ
 from pyramidkv.mistral_model import prepare_inputs_for_generation_mistral, prepare_inputs_for_generation_mistral_new
 
 
@@ -30,7 +30,6 @@ def replace_llama(method, model_name=None):
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_StreamingLLM
         transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_StreamingLLM
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_StreamingLLM
-        # transformers.models.llama.modeling_llama.LlamaForCausalLM.forward = LlamaForCausalLM_forward_speed
         
     elif method == "h2o":
         print("Using H2O!")
@@ -49,7 +48,6 @@ def replace_llama(method, model_name=None):
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_SnapKV
         transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_SnapKV
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_SnapKV
-        # transformers.models.llama.modeling_llama.LlamaForCausalLM.forward = LlamaForCausalLM_forward_speed
 
     
     elif method == "minference":
@@ -87,57 +85,18 @@ def replace_llama(method, model_name=None):
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_SnapKV_ThinK
 
 
-    # elif method == "cad":
-    #     print("Using CAD!")
-    #     # transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_CAD
-    #     # transformers.models.llama.modeling_llama.LlamaDecoderLayer.forward = LlamaDecoderLayer_forward_CAD
-    #     # transformers.models.llama.modeling_llama.LlamaModel.forward = LlamaModel_forward_CAD
-    #     transformers.models.llama.modeling_llama.LlamaForCausalLM.forward = LlamaForCausalLM_forward_CAD
-    #     # transformers.models.llama.modeling_llama.LlamaForCausalLM.prepare_inputs_for_generation = prepare_inputs_for_generation_llama_pcw
-    #     # return
-
-    # elif method == "bed":
-    #     print("Using BED!")
-    #     transformers.models.llama.modeling_llama.LlamaAttention.forward = LlamaAttention_forward_BED
-    #     # transformers.models.llama.modeling_llama.LlamaDecoderLayer.forward = LlamaDecoderLayer_forward_CAD
-    #     # transformers.models.llama.modeling_llama.LlamaModel.forward = LlamaModel_forward_CAD
-    #     transformers.models.llama.modeling_llama.LlamaForCausalLM.forward = LlamaForCausalLM_forward_BED
-    #     # transformers.models.llama.modeling_llama.LlamaForCausalLM.prepare_inputs_for_generation = prepare_inputs_for_generation_llama_pcw
-    #     # return
-
-    # elif method == "key":
-    #     print("Using key!")
-    #     # transformers.models.llama.modeling_llama.LlamaAttention.forward = LlamaAttention_forward_BED
-    #     # transformers.models.llama.modeling_llama.LlamaDecoderLayer.forward = LlamaDecoderLayer_forward_CAD
-    #     # transformers.models.llama.modeling_llama.LlamaModel.forward = LlamaModel_forward_CAD
-    #     transformers.models.llama.modeling_llama.LlamaForCausalLM.forward = LlamaForCausalLM_forward_key
-    #     # transformers.models.llama.modeling_llama.LlamaForCausalLM.prepare_inputs_for_generation = prepare_inputs_for_generation_llama_pcw
-    #     # return 
-
-    # elif method == "final":
-    #     print("Using final!")
-    #     transformers.models.llama.modeling_llama.LlamaAttention.forward = LlamaAttention_forward_final
-    #     transformers.models.llama.modeling_llama.LlamaForCausalLM.forward = LlamaForCausalLM_forward_final
-
-
-
-    elif method == "LAQ":
+    elif method == "laq":
         print("using LAQ!")
-        # transformers.models.llama.modeling_llama.LlamaAttention.forward = LlamaAttention_forward_probe
         transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = LlamaFlashAttention2_forward_LAQ
         transformers.models.llama.modeling_llama.LlamaForCausalLM.forward = LlamaForCausalLM_forward_LAQ
 
     elif method == 'fullkv':
         print('using fullkv!')
-        # transformers.models.llama.modeling_llama.LlamaForCausalLM.forward = LlamaForCausalLM_forward_speed
-        # transformers.models.qwen2.modeling_qwen2.Qwen2ForCausalLM.forward = LlamaForCausalLM_forward_speed
 
     if method not in ["fullkv"]:
         transformers.models.llama.modeling_llama.LlamaForCausalLM.prepare_inputs_for_generation = prepare_inputs_for_generation_llama_new
     
-from pyramidkv.mistral_model import  MistralFlashAttention2_forward_probe, MistralForCausalLM_forward_probe
 from pyramidkv.mistral_model import  MistralFlashAttention2_forward_LAQ, MistralForCausalLM_forward_LAQ
-from pyramidkv.mistral_model import MistralForCausalLM_forward_speed
 
 
 def replace_mistral(method):
@@ -171,7 +130,6 @@ def replace_mistral(method):
         transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_attn_forward_SnapKV
         transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_SnapKV
         transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_sdpa_attn_forward_SnapKV
-        transformers.models.mistral.modeling_mistral.MistralForCausalLM.forward = MistralForCausalLM_forward_speed
 
     elif method == "l2norm":
         print("Using L2Norm!")
@@ -193,14 +151,9 @@ def replace_mistral(method):
         transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_HeadKV
         transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_flash_attn2_forward_HeadKV
     
-    elif method == "probe":
-        print("using probe!")
-        transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = MistralFlashAttention2_forward_probe
-        transformers.models.mistral.modeling_mistral.MistralForCausalLM.forward = MistralForCausalLM_forward_probe
 
-    elif method == "LAQ":
+    elif method == "laq":
         print("using LAQ!")
-        # transformers.models.llama.modeling_llama.LlamaAttention.forward = LlamaAttention_forward_probe
         transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = MistralFlashAttention2_forward_LAQ
         transformers.models.mistral.modeling_mistral.MistralForCausalLM.forward = MistralForCausalLM_forward_LAQ
     
@@ -210,7 +163,7 @@ def replace_mistral(method):
 
 
 from pyramidkv.qwen2_model import qwen2_flash_attn2_forward_PyramidKV, qwen2_flash_attn2_forward_StreamingLLM, qwen2_flash_attn2_forward_H2O, qwen2_flash_attn2_forward_SnapKV
-from pyramidkv.qwen2_model import prepare_inputs_for_generation_qwen2_new, Qwen2FlashAttention2_forward_probe, Qwen2ForCausalLM_forward_probe
+from pyramidkv.qwen2_model import prepare_inputs_for_generation_qwen2_new
 from pyramidkv.qwen2_model import Qwen2FlashAttention2_forward_LAQ, Qwen2ForCausalLM_forward_LAQ
 
 def replace_qwen25(method):
@@ -269,13 +222,9 @@ def replace_qwen25(method):
     #     transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_flash_attn2_forward_HeadKV
     #     transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_HeadKV
     #     transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_flash_attn2_forward_HeadKV
-    elif method == "probe":
-        print("using probe!")
-        transformers.models.qwen2.modeling_qwen2.Qwen2FlashAttention2.forward = Qwen2FlashAttention2_forward_probe
-        transformers.models.qwen2.modeling_qwen2.Qwen2ForCausalLM.forward = Qwen2ForCausalLM_forward_probe
 
 
-    elif method == "LAQ":
+    elif method == "laq":
         print("using LAQ!")
         # transformers.models.llama.modeling_llama.LlamaAttention.forward = LlamaAttention_forward_probe
         transformers.models.qwen2.modeling_qwen2.Qwen2FlashAttention2.forward = Qwen2FlashAttention2_forward_LAQ

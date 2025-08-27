@@ -21,12 +21,12 @@ export CUDA_VISIBLE_DEVICES=0
 
 method=LAQ # Support LAQ
 
-max_capacity_prompts=256 # 128 256 512 
+max_capacity_prompts=128 # 128 256 512 
 
 attn_implementation=flash_attention_2 # Support "flash_attention_2"
 
-model_path=/share/home/syji/model/AI-ModelScope/Mistral-7B-Instruct-v0.2
-# model_path=/your/path/to/Mistral-7B-Instruct-v0.2
+# model_path=/home/syji/model/AI-ModelScope/Mistral-7B-Instruct-v0.2
+model_path=/your/path/to/Mistral-7B-Instruct-v0.2
 
 
 save_dir=results/
@@ -36,14 +36,12 @@ lookahead_max_capacity_prompts="${max_capacity_prompts}"
 
 lookahead_method=snapkv # snapkv in paper, but LAQ is orthogonal to methods such as SnapKV and PyramidKV.
 
-lookahead_window_size=32 # This window_size is used in the lookahead stage, and it is usually set to 32.
+lookahead_window_size=32 # This window_size is used for the lookahead_method.
 
 max_lookahead_size=8
-stage2_window_size=8 # This window_size is used in the decoding stage, and it is set to 8 for LAQ++, 0 for LAQ.
+stage2_window_size=8 # This window_size is used in the decoding stage, and it is set to 0 for LAQ, 8 for LAQ.
 
 datasets="narrativeqa qasper multifieldqa_en hotpotqa 2wikimqa musique gov_report qmsum multi_news trec triviaqa samsum passage_count passage_retrieval_en lcc repobench-p"
-# datasets="musique gov_report qmsum multi_news trec triviaqa samsum passage_count passage_retrieval_en lcc repobench-p"
-# datasets="lcc repobench-p"
 
 python3 run_longbench_LAQ.py \
     --method ${method} \

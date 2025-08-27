@@ -249,7 +249,7 @@ def main(args):
             elif args.method.lower() in ["streamingllm"]:
                 window_sizes = max_capacity_prompts - 4
 
-            elif args.method.lower() in ["LAQ"]:
+            elif args.method.lower() in ["laq"]:
                 model.config.tokenizer = tokenizer
                 model.config.kernel_sizes = kernel_sizes
                 model.config.pooling = pooling

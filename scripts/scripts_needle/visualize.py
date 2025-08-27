@@ -7,7 +7,7 @@ import pandas as pd
 import json
 import glob
 
-FOLDER_PATH = "./results_needle/results/LLaMA3_h2o_64_test"
+FOLDER_PATH = "./results_needle/results/Mistral_LAQ_96_test"
 
 
 MODEL_NAME = "Mistral-7B-Instruct-v0.2"
