@@ -11,11 +11,6 @@ Our codebase is built upon **[KVCache-Factory](https://github.com/Zefan-Cai/KVCa
 We sincerely thank the authors for providing open-source code to support this project.  
 
 
-
-## News
-
-- [2025-8-21] 🎉🎉🎉 Our paper has been accepted to **EMNLP 2025 Main Conference**!
-
 ## Installation
 
 ```bash
