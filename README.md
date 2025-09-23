@@ -6,7 +6,7 @@ This is the repo for our EMNLP 2025 paper:
 
 
 <p align="center">
-  <img src="img/framework.png" alt="Lookahead Q-Cache Framework" width="450"/>
+  <img src="img/framework.png" alt="Lookahead Q-Cache Framework" width="520"/>
 </p>
 In this paper, we propose Lookahead Q-Cache (LAQ),
 a novel eviction framework that generates lowcost pseudo lookahead queries to better approximate the true decoding-stage queries. Experimental results on LongBench and Needlein-a-Haystack benchmarks show that LAQ outperforms existing methods across various budget levels, achieving a 1 ∼ 4 point improvement on LongBench under limited cache budget.
