@@ -112,6 +112,11 @@ After inference, run
 
 to draw the img, you should change `FOLDER_PATH` in `visualize.py` to your output path.
 
+As shown in the below Figure, compared with SnapKV, **LAQ++ achieves nearly lossless performance** even under a strict budget constraint.
+
+<p align="center">
+  <img src="img/needle_example.png" alt="Needle Visualization Example" width="600"/>
+</p>
 
 ## Citation
 
