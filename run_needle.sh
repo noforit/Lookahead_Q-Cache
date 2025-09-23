@@ -25,10 +25,7 @@ model_provider=Mistral # Support LLaMA3, Mistral, qwen2
 
 max_capacity_prompts=96
 attn_implementation=flash_attention_2
-# model_path=/home/syji/model/LLM-Research/Llama-3.2-1B-Instruct
-# model_path=/home/syji/model/LLM-Research/Meta-Llama-3-8B-Instruct
-# model_path=/home/syji/model/share_model/Meta-Llama-3.1-8B-Instruct
-model_path=/home/syji/model/AI-ModelScope/Mistral-7B-Instruct-v0.2
+model_path=/your/path/to/Mistral-7B-Instruct-v0.2
 
 
 lookahead_method=snapkv

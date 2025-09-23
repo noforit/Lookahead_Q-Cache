@@ -25,7 +25,6 @@ max_capacity_prompts=128 # 128 256 512
 
 attn_implementation=flash_attention_2 # Support "flash_attention_2"
 
-# model_path=/home/syji/model/AI-ModelScope/Mistral-7B-Instruct-v0.2
 model_path=/your/path/to/Mistral-7B-Instruct-v0.2
 
 
