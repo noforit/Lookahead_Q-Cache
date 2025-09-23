@@ -5,6 +5,12 @@ This is the repo for our EMNLP 2025 paper:
 [Lookahead Q-Cache: Achieving More Consistent KV Cache Eviction via Pseudo Query](https://arxiv.org/abs/2505.20334)
 
 
+<p align="center">
+  <img src="img/framework.png" alt="Lookahead Q-Cache Framework" width="600"/>
+</p>
+In this paper, we propose Lookahead Q-Cache (LAQ),
+a novel eviction framework that generates lowcost pseudo lookahead queries to better approximate the true decoding-stage queries. Experimental results on LongBench and Needlein-a-Haystack benchmarks show that LAQ outperforms existing methods across various budget levels, achieving a 1 ∼ 4 point improvement on LongBench under limited cache budget.
+
 ## Acknowledgement
 
 Our codebase is built upon **[KVCache-Factory](https://github.com/Zefan-Cai/KVCache-Factory)**.  
